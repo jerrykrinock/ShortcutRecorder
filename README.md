@@ -4,19 +4,12 @@ This is yet another fork of the original macOS user interface control for keyboa
 
 
 • Supports Dark Mode in macOS 10.14 Mojave
-
 • Objective-C
-
 • Manual Retain/Release
-
 • Source code only; no framework, no demo project, no unit tests
-
 • Simple: Only 5x2=10 source code files
-
-• All vector drawing in code; no png files or other resources
-
+• All drawing is done in code (vector drawings); no png files or other resources
 • Unique feature: Option to ignore validation from the current application; useful for "cross-application" global keyboard shortcuts
-
 
 If you don't like these features, you may wish to consider instead:
 
