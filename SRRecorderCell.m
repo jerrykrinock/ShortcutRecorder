@@ -1151,7 +1151,7 @@
         }
     } else {
         //		NSLog(@"more to do");
-        [[self controlView] setNeedsDisplay:YES];
+        self.controlView.needsDisplay = YES;
         [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(_transitionTick) object:nil];
         [self performSelector:@selector(_transitionTick) withObject:nil afterDelay:(SRTransitionDuration/SRTransitionFrames)];
     }
@@ -1167,8 +1167,7 @@
     
     /*	[self setFocusRingType:NSFocusRingTypeNone];
      [[self controlView] setFocusRingType:NSFocusRingTypeNone];*/
-    [[self controlView] setNeedsDisplay:YES];
-    
+    self.controlView.needsDisplay = YES;
     // invalidate the focus ring rect...
     NSView *controlView = [self controlView];
     [controlView setKeyboardFocusRingNeedsDisplayInRect:[controlView bounds]];
@@ -1183,8 +1182,7 @@
     
     /*	[self setFocusRingType:NSFocusRingTypeNone];
      [[self controlView] setFocusRingType:NSFocusRingTypeNone];*/
-    [[self controlView] setNeedsDisplay:YES];
-    
+    self.controlView.needsDisplay = YES;
     // invalidate the focus ring rect...
     NSView *controlView = [self controlView];
     [controlView setKeyboardFocusRingNeedsDisplayInRect:[controlView bounds]];
