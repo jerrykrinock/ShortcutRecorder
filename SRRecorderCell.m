@@ -673,7 +673,7 @@
         
         switch ([currentEvent type])
         {
-            case NSLeftMouseDown:
+            case NSEventTypeLeftMouseDown:
             {
                 // Check if mouse is over remove/snapback image
                 if ([controlView mouse:mouseLocation inRect:trackingRect])
@@ -1295,17 +1295,17 @@
     NSUInteger a = allowedFlags;
     NSUInteger m = requiredFlags;
     
-    if (m & NSCommandKeyMask) filteredFlags |= NSCommandKeyMask;
-    else if ((flags & NSCommandKeyMask) && (a & NSCommandKeyMask)) filteredFlags |= NSCommandKeyMask;
+    if (m & NSEventModifierFlagCommand) filteredFlags |= NSEventModifierFlagCommand;
+    else if ((flags & NSEventModifierFlagCommand) && (a & NSEventModifierFlagCommand)) filteredFlags |= NSEventModifierFlagCommand;
     
-    if (m & NSAlternateKeyMask) filteredFlags |= NSAlternateKeyMask;
-    else if ((flags & NSAlternateKeyMask) && (a & NSAlternateKeyMask)) filteredFlags |= NSAlternateKeyMask;
+    if (m & NSEventModifierFlagOption) filteredFlags |= NSEventModifierFlagOption;
+    else if ((flags & NSEventModifierFlagOption) && (a & NSEventModifierFlagOption)) filteredFlags |= NSEventModifierFlagOption;
     
-    if ((m & NSControlKeyMask)) filteredFlags |= NSControlKeyMask;
-    else if ((flags & NSControlKeyMask) && (a & NSControlKeyMask)) filteredFlags |= NSControlKeyMask;
+    if ((m & NSEventModifierFlagControl)) filteredFlags |= NSEventModifierFlagControl;
+    else if ((flags & NSEventModifierFlagControl) && (a & NSEventModifierFlagControl)) filteredFlags |= NSEventModifierFlagControl;
     
-    if ((m & NSShiftKeyMask)) filteredFlags |= NSShiftKeyMask;
-    else if ((flags & NSShiftKeyMask) && (a & NSShiftKeyMask)) filteredFlags |= NSShiftKeyMask;
+    if ((m & NSEventModifierFlagShift)) filteredFlags |= NSEventModifierFlagShift;
+    else if ((flags & NSEventModifierFlagShift) && (a & NSEventModifierFlagShift)) filteredFlags |= NSEventModifierFlagShift;
     
     if ((m & NSFunctionKeyMask)) filteredFlags |= NSFunctionKeyMask;
     else if ((flags & NSFunctionKeyMask) && (a & NSFunctionKeyMask)) filteredFlags |= NSFunctionKeyMask;
@@ -1315,7 +1315,7 @@
 
 - (BOOL)_validModifierFlags:(NSUInteger)flags
 {
-    return (allowsKeyOnly ? YES : (((flags & NSCommandKeyMask) || (flags & NSAlternateKeyMask) || (flags & NSControlKeyMask) || (flags & NSShiftKeyMask) || (flags & NSFunctionKeyMask)) ? YES : NO));	
+    return (allowsKeyOnly ? YES : (((flags & NSEventModifierFlagCommand) || (flags & NSEventModifierFlagOption) || (flags & NSEventModifierFlagControl) || (flags & NSEventModifierFlagShift) || (flags & NSFunctionKeyMask)) ? YES : NO));	
 }
 
 #pragma mark -
@@ -1325,10 +1325,10 @@
     NSUInteger carbonFlags = ShortcutRecorderEmptyFlags;
     NSUInteger filteredFlags = [self _filteredCocoaFlags: cocoaFlags];
     
-    if (filteredFlags & NSCommandKeyMask) carbonFlags |= cmdKey;
-    if (filteredFlags & NSAlternateKeyMask) carbonFlags |= optionKey;
-    if (filteredFlags & NSControlKeyMask) carbonFlags |= controlKey;
-    if (filteredFlags & NSShiftKeyMask) carbonFlags |= shiftKey;
+    if (filteredFlags & NSEventModifierFlagCommand) carbonFlags |= cmdKey;
+    if (filteredFlags & NSEventModifierFlagOption) carbonFlags |= optionKey;
+    if (filteredFlags & NSEventModifierFlagControl) carbonFlags |= controlKey;
+    if (filteredFlags & NSEventModifierFlagShift) carbonFlags |= shiftKey;
     
     // I couldn't find out the equivalent constant in Carbon, but apparently it must use the same one as Cocoa. -AK
     if (filteredFlags & NSFunctionKeyMask) carbonFlags |= NSFunctionKeyMask;
