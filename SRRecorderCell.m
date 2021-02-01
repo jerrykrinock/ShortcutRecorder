@@ -111,7 +111,7 @@
         requiredFlags = [[aDecoder decodeObject] unsignedIntegerValue];
     }
     
-    allowedFlags |= NSFunctionKeyMask;
+    allowedFlags |= NSEventModifierFlagFunction;
     
     [self _loadKeyCombo];
     
@@ -800,7 +800,7 @@
                 if (allowsKeyOnly) {
                     // ...AND modifiers are empty, or empty save for the Function key
                     // (needed, since forward delete is fn+delete on laptops)
-                    if (flags == ShortcutRecorderEmptyFlags || flags == (ShortcutRecorderEmptyFlags | NSFunctionKeyMask)) {
+                    if (flags == ShortcutRecorderEmptyFlags || flags == (ShortcutRecorderEmptyFlags | NSEventModifierFlagFunction)) {
                         // ...check for behavior in escapeKeysRecord.
                         if (!escapeKeysRecord) {
                             goAhead = NO;
@@ -1307,15 +1307,15 @@
     if ((m & NSEventModifierFlagShift)) filteredFlags |= NSEventModifierFlagShift;
     else if ((flags & NSEventModifierFlagShift) && (a & NSEventModifierFlagShift)) filteredFlags |= NSEventModifierFlagShift;
     
-    if ((m & NSFunctionKeyMask)) filteredFlags |= NSFunctionKeyMask;
-    else if ((flags & NSFunctionKeyMask) && (a & NSFunctionKeyMask)) filteredFlags |= NSFunctionKeyMask;
+    if ((m & NSEventModifierFlagFunction)) filteredFlags |= NSEventModifierFlagFunction;
+    else if ((flags & NSEventModifierFlagFunction) && (a & NSEventModifierFlagFunction)) filteredFlags |= NSEventModifierFlagFunction;
     
     return filteredFlags;
 }
 
 - (BOOL)_validModifierFlags:(NSUInteger)flags
 {
-    return (allowsKeyOnly ? YES : (((flags & NSEventModifierFlagCommand) || (flags & NSEventModifierFlagOption) || (flags & NSEventModifierFlagControl) || (flags & NSEventModifierFlagShift) || (flags & NSFunctionKeyMask)) ? YES : NO));	
+    return (allowsKeyOnly ? YES : (((flags & NSEventModifierFlagCommand) || (flags & NSEventModifierFlagOption) || (flags & NSEventModifierFlagControl) || (flags & NSEventModifierFlagShift) || (flags & NSEventModifierFlagFunction)) ? YES : NO));	
 }
 
 #pragma mark -
@@ -1331,7 +1331,7 @@
     if (filteredFlags & NSEventModifierFlagShift) carbonFlags |= shiftKey;
     
     // I couldn't find out the equivalent constant in Carbon, but apparently it must use the same one as Cocoa. -AK
-    if (filteredFlags & NSFunctionKeyMask) carbonFlags |= NSFunctionKeyMask;
+    if (filteredFlags & NSEventModifierFlagFunction) carbonFlags |= NSEventModifierFlagFunction;
     
     return carbonFlags;
 }
