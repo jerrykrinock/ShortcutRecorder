@@ -684,7 +684,7 @@
                 
                 break;
             }
-            case NSLeftMouseDragged:
+            case NSEventTypeLeftMouseDragged:
             {
                 // Recheck if mouse is still over the image while dragging
                 mouseInsideTrackingArea = [controlView mouse:mouseLocation inRect:trackingRect];
@@ -735,7 +735,7 @@
             }
         }
         
-    } while ((currentEvent = [[controlView window] nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask) untilDate:[NSDate distantFuture] inMode:NSEventTrackingRunLoopMode dequeue:YES]));
+    } while ((currentEvent = [[controlView window] nextEventMatchingMask:(NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp) untilDate:[NSDate distantFuture] inMode:NSEventTrackingRunLoopMode dequeue:YES]));
     
     return YES;
 }
@@ -823,7 +823,7 @@
                                         error:&error] ) {
                         // display the error...
                         NSAlert *alert = [NSAlert alertWithNonRecoverableError:error];
-                        [alert setAlertStyle:NSCriticalAlertStyle];
+                        [alert setAlertStyle:NSAlertStyleCritical];
                         [alert runModal];
                         
                         // Recheck pressed modifier keys
