@@ -264,9 +264,9 @@
         // Draw border and remove badge if needed
         if (!isRecording)
         {
-            [[NSColor windowFrameColor] set];
+            [[NSColor separatorColor] set];
             [roundedRect stroke];
-            
+
             // If key combination is set and valid, draw remove image
             if (![self _isEmpty] && [self isEnabled])
             {
@@ -412,7 +412,7 @@
         [[NSColor controlBackgroundColor] set];
         [[NSGraphicsContext currentContext] saveGraphicsState];
         [roundedRect fill];
-        [[NSColor windowFrameColor] set];
+        [[NSColor separatorColor] set];
         [roundedRect stroke];
         [roundedRect addClip];
         
@@ -434,7 +434,7 @@
             correctedSnapBackRect.origin = [viewportMovement transformPoint:correctedSnapBackRect.origin];
             
             NSBezierPath *snapBackButton = [NSBezierPath bezierPathWithRect:correctedSnapBackRect];
-            [[[[NSColor windowFrameColor] shadowWithLevel:0.2f] colorWithAlphaComponent:alphaRecording] set];
+            [[[[NSColor separatorColor] shadowWithLevel:0.2f] colorWithAlphaComponent:alphaRecording] set];
             [snapBackButton stroke];
             //		NSLog(@"stroked along path of %@", NSStringFromRect(correctedSnapBackRect));
             
@@ -1093,8 +1093,8 @@
 
 - (void)_createGradient
 {
-    NSColor *gradientStartColor = [[[NSColor alternateSelectedControlColor] shadowWithLevel: 0.2f] colorWithAlphaComponent: 0.9f];
-    NSColor *gradientEndColor = [[[NSColor alternateSelectedControlColor] highlightWithLevel: 0.2f] colorWithAlphaComponent: 0.9f];
+    NSColor *gradientStartColor = [[[NSColor controlAccentColor] shadowWithLevel: 0.2f] colorWithAlphaComponent: 0.9f];
+    NSColor *gradientEndColor = [[[NSColor controlAccentColor] highlightWithLevel: 0.2f] colorWithAlphaComponent: 0.9f];
     
     recordingGradient = [[NSGradient alloc] initWithStartingColor:gradientStartColor endingColor:gradientEndColor];
 }
